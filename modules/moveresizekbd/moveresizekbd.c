@@ -6,6 +6,7 @@ moveresize(const Arg *arg)
 	Monitor *m = selmon;
 
 	if(!(m->sel && arg && arg->v && m->sel->isfloating)) {
+
 #if DIRECTIONAL_MOVE
     if (((int *)arg->v)[0] != 0 || ((int *)arg->v)[1] != 0) {
       if (((int *)arg->v)[1] > 0) movedir(&(Arg){.i = 3});  // Down
@@ -16,15 +17,31 @@ moveresize(const Arg *arg)
 #endif
 		return;
   }
+
   XRaiseWindow(dpy, m->sel->win);
+
 	resize(m->sel, m->sel->x + ((int *)arg->v)[0],
 		m->sel->y + ((int *)arg->v)[1],
 		m->sel->w + ((int *)arg->v)[2],
 		m->sel->h + ((int *)arg->v)[3],
 		True);
+ 
+#if ENHANCED_TOGGLE_FLOATING && RESTORE_SIZE_AND_POS_ETF
+    if (m->sel->isfloating) {
+      m->sel->wasmanuallyedited = 1;
+      m->sel->sfx = m->sel->x;
+      m->sel->sfy = m->sel->y;
+      m->sel->sfw = m->sel->w;
+      m->sel->sfh = m->sel->h;
+    }
+#endif
+
+  focus(m->sel);
+
 #if WARP_TO_CLIENT && WARP_TO_CENTER_OF_WINDOW_MOVED_BY_KEYBOARD
   warptoclient(m->sel);
 #endif
+
 	while(XCheckMaskEvent(dpy, EnterWindowMask, &ev));
 }
 
@@ -61,6 +78,8 @@ moveresize(const Arg *arg)
     Client *c = m->sel;
 
     XRaiseWindow(dpy, c->win);
+
+
 
     if (selmon->lt[selmon->sellt]->arrange != NULL) {
         resize(c,
@@ -113,6 +132,16 @@ moveresize(const Arg *arg)
         resize(c, nx, ny, nw, nh, True);
     }
 
+#if ENHANCED_TOGGLE_FLOATING && RESTORE_SIZE_AND_POS_ETF
+    if (c->isfloating) {
+      c->wasmanuallyedited = 1;
+      c->sfx = c->x;
+      c->sfy = c->y;
+      c->sfw = c->w;
+      c->sfh = c->h;
+    }
+#endif
+
     focus(c);
 
 #if WARP_TO_CLIENT && WARP_TO_CENTER_OF_WINDOW_MOVED_BY_KEYBOARD
@@ -121,6 +150,9 @@ moveresize(const Arg *arg)
 
     while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
 
+#if IT_SHOW_COORDINATES_IN_BAR
     drawbar(m);
+#endif
+
 }
 #endif
