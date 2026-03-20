@@ -523,7 +523,7 @@ buttonpress(XEvent *e)
 			arg.ui = 1 << i;
 		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
 			click = ClkLtSymbol;
-		else if (ev->x > selmon->ww - (int)TEXTW(stext))
+		else if (ev->x > selmon->ww - (int)TEXTW(stext) + lrpad - 2)
 			click = ClkStatusText;
 		else
 			click = ClkWinTitle;
@@ -1779,6 +1779,8 @@ sendmon(Client *c, Monitor *m)
 	#if EWMH_TAGS
 	updatewmdesktop(c);
 	#endif
+	if (c->isfullscreen)
+		resizeclient(c, m->mx, m->my, m->mw, m->mh);
 	focus(NULL);
 	arrange(NULL);
 }
