@@ -1,20 +1,13 @@
 /* See LICENSE file for copyright and license details.
-This wm is forked from dwm 6.7 (but keep up with all dwm's updates), thanks suckless for their incredible work on dwm!
+This wm is forked from dwm 6.7 (but keeps up with all dwm's updates), thanks suckless for their incredible work on dwm!
+Infinite tags module is heavily inspired from 5element which is inspired from the hevel wayland compositor.
 
-vxwm 2.0 // by wh1tepearl
+vxwm 2.1 // by solyn (wh1tepearl's child)
 
-Known issues:
-
-None
-
-Solved issues:
-1. When using BETTER_RESIZE and resizing window on top of bar, bar will start to erase as window resizes
-2. When usinng BAR_PADDING status text doesn't show.
-3. Windows teleports when hitting its minimum size when using BETTER_RESIZE
-4. When using BETTER_RESIZE window is not becaming floating when resizing
 */
 
 // Modules configuration is in modules.h
+// Config is in config.h (say wallahi bro)
 
 #include <errno.h>
 #include <locale.h>
