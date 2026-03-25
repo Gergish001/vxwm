@@ -598,7 +598,11 @@ cleanupmon(Monitor *mon)
 	}
 	XUnmapWindow(dpy, mon->barwin);
 	XDestroyWindow(dpy, mon->barwin);
-	free(mon);
+#if INFINITE_TAGS
+  free(mon->canvas);
+#endif
+  free(mon);
+
 }
 
 void
@@ -897,7 +901,6 @@ drawbar(Monitor *m)
 		}
 	}
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
-  XRaiseWindow(dpy, m->barwin);
 }
 
 void
@@ -1729,6 +1732,19 @@ restack(Monitor *m)
 				wc.sibling = c->win;
 			}
 	}
+#if INFINITE_TAGS
+  else {
+    wc.stack_mode = Below;
+    wc.sibling = m->barwin;
+    for (c = m->stack; c; c = c->snext) {
+      if (ISVISIBLE(c) && !c->isfixed) {
+        XConfigureWindow(dpy, c->win, CWSibling|CWStackMode, &wc);
+        wc.sibling = c->win;
+      }
+    }
+    XRaiseWindow(dpy, m->barwin);
+  }
+#endif
 	XSync(dpy, False);
 	while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
 }

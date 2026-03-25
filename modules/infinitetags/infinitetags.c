@@ -170,37 +170,31 @@ restore_canvas_positions(Monitor *m) {
 void
 centerwindow(const Arg *arg)
 {
-    Client *c = (arg && arg->v) ? (Client *)arg->v : selmon->sel;
+  Client *c = (arg && arg->v) ? (Client *)arg->v : selmon->sel;
 
-    if (!c || !c->mon || c->mon->lt[c->mon->sellt]->arrange != NULL)
-        return;
+  if (!c || !c->mon || c->mon->lt[c->mon->sellt]->arrange != NULL)
+    return;
 
-    Monitor *m = c->mon;
-    int tagidx = getcurrenttag(m);
+  Monitor *m = c->mon;
+  int tagidx = getcurrenttag(m);
 
-    int screen_center_x = m->wx + (m->ww / 2);
-    int screen_center_y = m->wy + (m->wh / 2);
+  int dx = (m->wx + m->ww - WIDTH(c)) / 2 - c->x;
+  int dy = m->wy + (m->wh / 2) - (c->y + HEIGHT(c) / 2);
 
-    int win_center_x = c->x + (c->w + 2 * c->bw) / 2;
-    int win_center_y = c->y + (c->h + 2 * c->bw) / 2;
+  if (dx == 0 && dy == 0)
+    return;
 
-    int dx = screen_center_x - win_center_x;
-    int dy = screen_center_y - win_center_y;
-
-    if (dx == 0 && dy == 0)
-        return;
-
-    Client *tmp;
-    for (tmp = m->clients; tmp; tmp = tmp->next) {
-        if (ISVISIBLE(tmp)) {
-            tmp->x += dx;
-            tmp->y += dy;
-            XMoveWindow(dpy, tmp->win, tmp->x, tmp->y);
-        }
+  Client *tmp;
+  for (tmp = m->clients; tmp; tmp = tmp->next) {
+    if (ISVISIBLE(tmp)) {
+      tmp->x += dx;
+      tmp->y += dy;
+      XMoveWindow(dpy, tmp->win, tmp->x, tmp->y);
     }
+  }
 
-    m->canvas[tagidx].cx += dx;
-    m->canvas[tagidx].cy += dy;
+  m->canvas[tagidx].cx += dx;
+  m->canvas[tagidx].cy += dy;
 
-    drawbar(m);
+  drawbar(m);
 }
