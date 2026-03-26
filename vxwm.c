@@ -1734,6 +1734,8 @@ restack(Monitor *m)
 	}
 #if INFINITE_TAGS
   else {
+    if (m->sel && m->sel->isfullscreen)
+      return;
     wc.stack_mode = Below;
     wc.sibling = m->barwin;
     for (c = m->stack; c; c = c->snext) {
