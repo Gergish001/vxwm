@@ -114,8 +114,6 @@ And then add this to keys massive:
 
     { MODKEY|ShiftMask,             XK_u, spawn,          {.v = yoursillyprogramcmd } }, 
 
-......Mod    Modificator               Key                      arg
-
 ## Modules
 
 Enable/disable (0/1) modules you need/don't need, thats it.
@@ -124,8 +122,8 @@ Enable/disable (0/1) modules you need/don't need, thats it.
 
 # Acknowledgements
 
-vxwm was made in solo by a linux enthusiast wh1tepearl, many thanks to suckless.org and the [dwm] developers for making dwm in first place.
-Thanks 5element developer and hevel wayland compositor developers for inspiration of infinite tags.
+vxwm was made by wh1tepearl, many thanks to suckless.org and the [dwm] developers for making dwm in first place.
+Thanks 5element developer and hevel wayland compositor developers for the inspiration of infinite tags.
 
 Also try:
 
