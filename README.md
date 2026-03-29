@@ -1,27 +1,9 @@
 # vxwm - Versatile X Window Manager for x11 forked from dwm
 
-# Features
-vxwm is dwm on steroids, it can be as lightweight as you want.
-It has some patches for dwm pre installed that can be enabled/disabled by switching 0 to 1 or vice versa. (like in dwm-flexipatch)
-It also has some unique features like 8 sided resize, enhanced toggle floating, warp cursor and more! (They also can be toggled)
-Check modules.def.h for full list of features.
+# About
+vxwm represents a significantly enhanced version of dwm that maintains its lightweight nature while offering modular flexibility. Instead of manually applying patches, you can toggle pre-installed features directly in the configuration by switching values between 0 and 1, it is all manageable via modules.def.h.
 
-But the main feature of vxwm, is infinite tags.
- 
-Most tiling window managers (like the default dwm) treat your screen like a slide-projector. You click a button, and the current "slide" is swapped for another. If an window is off-screen, it doesn't exist.
-
-With infinite tags enabled, vxwm treats your screen like a magnifying glass over a giant wooden desk.
-
-The Canvas is Infinite
-Your windows aren't "on" tags. They are placed on a massive, invisible surface. Your monitor is just a small window through which you look at that surface.
-
-Move the View, Not Just the Windows
-Instead of managing "layers" or "hidden states," you manage position.
-
-Want more space? Slide the view over.
-Can't find a window? Switch your focus to it, and the world slides until that window is right under your nose.
-Lost? Hit the "homecanvas" keybind to snap your view back to the start.
-Even though this sounds complex, it is actually pretty lightweight ~250 l.o.c, and is very easy to use.
+The defining feature of vxwm is its implementation of infinite tags. While traditional tiling managers act like a slide projector, swapping one static view for another, vxwm treats the screen as a viewport over a vast, continuous canvas. Windows aren't hidden or layered; they exist on an infinite surface, and you simply move your perspective across it. You can slide your view to find more space, snap focus to a specific window, or return to the origin using the homecanvas bind. Even though this sounds complex, this isn't resource hungry and isn't hard to use.
 
 # Requirements
 
@@ -118,7 +100,12 @@ And then add this to keys massive:
 
 Enable/disable (0/1) modules you need/don't need, thats it.
 
-# AFTER ANY CHANGE IN CONFIG/MODULES RECOMPILE VXWM AND RESTART USING RVX
+## AFTER ANY CHANGE IN CONFIG/MODULES RECOMPILE VXWM AND RESTART USING RVX
+
+> [!NOTE]
+> If you encounter any bugs - please make an issue!
+> If you want something added - please make an issue!
+> If you want to change something - please make an issue!
 
 # Acknowledgements
 
