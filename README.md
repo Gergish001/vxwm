@@ -101,7 +101,7 @@ And then add this to keys massive:
 Enable/disable (0/1) modules you need/don't need, thats it.
 
 > [!NOTE]
-> Aftet any change in config/modules recompile vxwm and restart using rvx.
+> After any change in config/modules recompile vxwm and restart using rvx.
 
 # Acknowledgements
 
