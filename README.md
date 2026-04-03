@@ -15,9 +15,9 @@ In order to build vxwm you need the Xlib, Xft and Xinerama header files.
 
 ## Deps Installation
 
-Arch Linux:
+Arch Linux + compilator for newbie:
 
-    sudo pacman -Sy libx11 libxft libxinerama
+    sudo pacman -Sy libx11 libxft libxinerama make gcc
 
 Void Linux:
 
