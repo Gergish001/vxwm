@@ -27,8 +27,8 @@ clean:
 
 dist: clean
 	mkdir -p vxwm-${VERSION}
-	cp -R LICENSE Makefile README config.def.h config.mk\
-		vxwm.1 drw.h util.h ${SRC} transient.c vxwm-${VERSION}
+	cp -R LICENSE Makefile README.md config.def.h config.mk\
+		vxwm.1 drw.h util.h ${SRC} vxwm-${VERSION}
 	tar -cf vxwm-${VERSION}.tar vxwm-${VERSION}
 	gzip vxwm-${VERSION}.tar
 	rm -rf vxwm-${VERSION}
